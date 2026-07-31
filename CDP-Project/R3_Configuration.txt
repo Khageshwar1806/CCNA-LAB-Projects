@@ -1,0 +1,10 @@
+enable
+conf t
+hostname R3
+cdp run
+ip domain-name Akash
+int fa0/0
+ip address 192.168.20.2 255.255.255.0
+no shutdown
+end
+Write
