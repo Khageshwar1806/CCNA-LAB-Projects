@@ -1,0 +1,48 @@
+!initial configuration
+conf t
+hostname TTBS-R2
+ip domain-name TTBS
+username Akash privilege 15 secret Akash@1407
+
+!interface configuration
+
+int fa1/0
+ip address 192.168.20.2 255.255.255.0
+no shutdown
+exit
+
+int fa0/0
+ip address 10.180.172.1 255.255.255.0
+no shutdown
+exit
+
+!BGP Configuration
+router bgp 100
+network 10.180.172.0 mask 255.255.255.0
+network 192.168.20.0 mask 255.255.255.0
+neighbor 10.180.172.2 remote-as 200
+neighbor 192.168.20.1 remote-as 100
+exit
+
+!Remote Configuration
+line vty 0 4
+login local 
+transport input ssh
+exit
+
+Crypto key generate rsa 
+
+
+
+
+end
+
+
+
+
+write
+
+
+
+
+

@@ -1,0 +1,47 @@
+!initial configuration
+conf t
+hostname ISP
+ip domain-name ISP
+username Akash privilege 15 secret Akash@1407
+
+!interface configuration
+
+int fa0/0
+ip address 10.180.172.2 255.255.255.0
+no shutdown
+exit
+
+int fa1/0
+ip address 10.180.176.1 255.255.255.0
+no shutdown
+exit
+
+!BGP Configuration
+router bgp 200
+network 10.180.172.0 mask 255.255.255.0
+network 10.180.176.0 mask 255.255.255.0
+neighbor 10.180.172.1 remote-as 100
+exit
+
+!Remote Configuration
+line vty 0 4
+login local 
+transport input ssh
+exit
+
+Crypto key generate rsa 
+
+
+
+
+end
+
+
+
+
+write
+
+
+
+
+
