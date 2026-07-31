@@ -1,0 +1,53 @@
+! initial Configuration
+enable
+conf t
+hostname R3
+ip domain-name Akash
+crypto key generate rsa
+username Akash privilege 15 secret Akash@1407
+
+! SSH configuration
+line vty 0 4 
+login local 
+transport input ssh
+exit
+
+
+! Interface Configuration
+
+int fa0/0
+ip address 192.168.30.2 255.255.255.0
+no shutdown
+exit
+
+int fa0/1
+ip address 192.168.20.2 255.255.255.0
+no shutdown
+exit
+
+int fa1/0
+ip address 192.168.40.1 255.255.255.0
+no shutdown
+exit
+
+! DHCP Configuration
+ip dhcp pool meesho
+network 192.168.40.0 255.255.255.0
+default-router 192.168.40.1
+dns-server 8.8.8.8
+
+! Dynamic Routing Configuration
+
+ip routing 
+router rip 
+version 2
+network 192.168.20.0
+network 192.168.30.0
+network 192.168.40.0
+
+
+! exit and save the configuration
+end
+write
+
+
