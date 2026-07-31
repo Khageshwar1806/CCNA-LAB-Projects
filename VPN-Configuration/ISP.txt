@@ -1,0 +1,26 @@
+! Initial Configuration
+enable 
+conf t
+hostname ISP
+
+! Interface Configuration
+int fa0/0
+ip address 1.1.1.2 255.255.255.0
+no shutdown
+exit
+
+int fa0/1
+ip address 2.2.2.2 255.255.255.0
+no shutdown
+exit
+
+
+end
+
+
+
+
+write
+
+
+
