@@ -1,0 +1,60 @@
+! Initial Configuration
+enable
+conf t
+hostname Raipur
+username Akash privilege 15 secret Akash@1407
+ip domain-name Akash
+
+! Interface Configuration
+int fa0/0
+ip address 192.168.10.1  255.255.255.0
+no shutdown
+ip nat inside 
+exit
+
+int fa0/1
+ip address 10.10.10.1 255.255.255.0
+no shutdown
+ip nat outside 
+exit
+
+! Static NAT Configuration
+ip nat inside source static 192.168.10.2 10.10.10.1
+
+ip nat inside source static 192.168.10.10  10.10.10.3
+
+! Routing Protocol
+ip route 0.0.0.0 0.0.0.0 10.10.10.2
+
+! DHCP Configuration
+ip dhcp pool meesho
+network 192.168.10.0 255.255.255.0
+default-router 192.168.10.1
+exit
+
+! Remote Configuration
+line vty 04 
+login local 
+transport input ssh
+exit
+
+crypto key generate rsa
+
+
+
+
+
+
+
+
+
+end
+
+
+
+write
+
+
+
+
+

@@ -1,0 +1,46 @@
+! Initial Configuration
+enable
+conf t
+hostname Google
+
+
+! Interface Configuration
+int fa0/0
+ip address 20.20.20.2  255.255.255.0
+no shutdown
+exit
+
+int fa0/1
+ip address 8.8.8.1 255.255.255.0
+no shutdown
+exit
+
+
+! Routing Protocol
+router ospf 1
+Router-id 2.2.2.2
+network 8.8.8.0  0.0.0.255 area 0
+network 20.20.20.0 0.0.0.255 area 0
+exit
+
+
+! DHCP Configuration
+ip dhcp pool meesho
+network 8.8.8.0 255.255.255.0
+default-router 8.8.8.1
+exit
+
+
+
+
+
+end
+
+
+
+write
+
+
+
+
+
