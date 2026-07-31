@@ -1,0 +1,18 @@
+! initial Configuartion
+enable
+conf t
+hostname SW-L2-2
+
+! VTP configuration
+vtp mode client
+vtp domain Akash
+vtp password Akash@1407
+
+
+end
+
+
+
+
+write
+

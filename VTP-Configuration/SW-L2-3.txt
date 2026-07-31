@@ -1,0 +1,18 @@
+! initial Configuartion
+enable
+conf t
+hostname SW-L2-3
+
+! VTP configuration
+vtp mode transparent
+vtp domain Akash
+vtp password Akash@1407
+
+
+end
+
+
+
+
+write
+

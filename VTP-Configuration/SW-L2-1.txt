@@ -1,0 +1,30 @@
+! initial Configuartion
+enable
+conf t
+hostname SW-L2-1
+
+! VTP configuration
+vtp mode server
+vtp domain Akash
+vtp password Akash@1407
+
+! VLAN Configuartion
+vlan 10 
+name IT
+exit
+
+vlan 20 
+name HR
+exit
+
+vlan 30
+name meesho
+exit
+
+end
+
+
+
+
+write
+
