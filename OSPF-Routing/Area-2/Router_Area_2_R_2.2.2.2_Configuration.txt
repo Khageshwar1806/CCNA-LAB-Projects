@@ -1,0 +1,42 @@
+!initial Configuration
+enable
+conf t
+hostname Area-2-R-2.2.2.2
+ip domain name Area-2
+username Akash privilege 15 secret Akash@1407
+
+!Interface Configuration
+int loopback 0 
+ip address 10.2.2.2 255.255.255.255
+exit
+
+int fa0/0
+ip address 192.168.90.2 255.255.255.0
+no shutdown
+exit
+
+int fa0/1
+ip address 192.168.91.1 255.255.255.0
+no shutdown
+exit
+
+
+! OSPF Routing Configuration
+ip routing
+router ospf 100
+router-id 2.2.2.2
+network 10.2.2.2 0.0.0.0 area 2
+network 192.168.90.0 0.0.0.255 area 2
+network 192.168.91.0 0.0.0.255 area 2
+
+!Remote SSH Configuration
+line vty 0 4
+login local
+transport input ssh
+exit
+
+crypto key generate rsa
+
+
+end
+write
