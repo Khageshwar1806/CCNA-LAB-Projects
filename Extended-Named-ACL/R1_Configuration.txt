@@ -1,0 +1,53 @@
+!initial Configuration
+enable
+conf t
+hostname R1
+
+!Extended Numbered Configuration 
+access-list 101 deny TCP host 192.168.50.2 host 192.168.10.10 eq 80
+access-list 101 deny ICMP host 192.168.50.3 host 192.168.10.10
+access-list 101 deny TCP host 192.168.50.4 host 192.168.10.10  eq 23
+access-list 101 deny IP host 192.168.50.5 host 192.168.10.10
+access-list 101 permit IP any any
+
+
+!Apply ACL on interface 
+int fa0/1
+ip access-group 101 in
+
+!interface configuration
+int fa0/0
+ip address 192.168.10.1 255.255.255.0
+no shutdown
+exit
+
+int fa0/1
+ip address 192.168.20.1 255.255.255.0
+no shutdown
+exit
+
+!DHCP Configuration
+ip dhcp pool meesho-1
+network 192.168.10.0 255.255.255.0
+default-router 192.168.10.1
+dns-server 8.8.8.8
+exit
+
+!Dynamic Routing Protocol
+router ospf 100
+router-id 1.1.1.1
+network 192.168.10.0 0.0.0.255 area 0
+network 192.168.20.0 0.0.0.255 area 0
+
+
+
+end
+
+
+
+
+write
+
+
+
+
