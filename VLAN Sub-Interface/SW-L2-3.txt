@@ -1,0 +1,34 @@
+! initial Configuration
+enable
+conf t
+hostname SW-L2-3
+
+! VTP Configuration
+vtp mode client
+vtp domain Akash
+
+! interface movement 
+int range fa0/1-3
+switchport mode access
+exit
+
+int fa0/1
+switchport access vlan 10
+exit
+
+int fa0/2
+switchport access vlan 20
+exit
+
+int fa0/3
+switchport access vlan 30
+exit
+
+
+end
+
+
+
+write
+
+

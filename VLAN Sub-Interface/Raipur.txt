@@ -1,0 +1,55 @@
+! initial Configuration
+enable 
+conf t
+hostname Raipur
+
+! interface Configuration
+int fa0/0
+Description Main link for Switches
+no shutdown
+exit
+
+int fa0/0.10
+Description Gateway for VLAN 10 or IT  VLAN
+encapsulation dot1q 10
+ip address 192.168.10.1 255.255.255.0
+exit
+
+int fa0/0.20
+Description Gateway for VLAN 20 or HR  VLAN
+encapsulation dot1q 20
+ip address 192.168.20.1 255.255.255.0
+exit
+
+int fa0/0.30
+Description Gateway for VLAN 30 or Meesho  VLAN
+encapsulation dot1q 30
+ip address 192.168.30.1 255.255.255.0
+exit
+
+! DHCP Configuration
+ip dhcp pool IT
+network 192.168.10.0 255.255.255.0
+default-router 192.168.10.1
+dns-server 8.8.8.8
+exit
+
+ip dhcp pool HR
+network 192.168.20.0 255.255.255.0
+default-router 192.168.20.1
+dns-server 8.8.8.8
+exit
+
+ip dhcp pool Meesho
+network 192.168.30.0 255.255.255.0
+default-router 192.168.30.1
+dns-server 8.8.8.8
+exit
+
+end
+
+
+
+write
+
+
