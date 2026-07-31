@@ -1,0 +1,30 @@
+enable
+conf t
+ip domain-name TTBS
+Hostname R2
+ip route 192.168.10.0 255.255.255.0 192.168.20.1
+ip route 192.168.50.0 255.255.255.0 192.168.40.2
+int fa0/0
+ip add 192.168.30.1 255.255.255.0
+no shutdown
+int se1/1
+ip add 192.168.40.1 255.255.255.0
+clock rate 128000
+no shutdown
+int se1/0
+ip add 192.168.20.2 255.255.255.0
+no shutdown
+exit
+ip dhcp pool R2
+network 192.168.30.0 255.255.255.0
+default-router 192.168.30.1
+dns-server 8.8.8.8
+exit
+username Akash privilege 15 secret Akash@1407
+line vty 0 4 
+login local
+transport input ssh
+exit
+crypto key generate rsa
+end
+Write
